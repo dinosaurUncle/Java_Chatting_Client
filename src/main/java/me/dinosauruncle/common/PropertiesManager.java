@@ -1,7 +1,5 @@
 package me.dinosauruncle.common;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import me.dinosauruncle.main.MainApp;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -28,9 +26,8 @@ public class PropertiesManager {
         int index = path.indexOf(identifier);
         path = path.substring(0, index+ identifier.length());
         JSONObject jsonObject = new JSONObject();
-        URL url = MainApp.class.getClassLoader().getResource("me/dinosauruncle/login/login.fxml");
         jsonObject.put("resourcePath", path);
-        jsonObject.put("login.fxml", MainApp.class.getClassLoader().getResource("me/dinosauruncle/login/login.fxml").getPath());
+        jsonObject.put("login.fxml", MainApp.class.getClassLoader().getResource("me/dinosauruncle/view/login/login.fxml").getPath());
         jsonObject.put("styles.css", MainApp.class.getClassLoader().getResource("me/dinosauruncle/style/styles.css").getPath());
         FileWriter fileWriter = null;
         try {
