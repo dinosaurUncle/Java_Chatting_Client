@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class PropertiesManager {
@@ -29,6 +30,8 @@ public class PropertiesManager {
         jsonObject.put("resourcePath", path);
         jsonObject.put("login.fxml", MainApp.class.getClassLoader().getResource("me/dinosauruncle/view/login/login.fxml").getPath());
         jsonObject.put("styles.css", MainApp.class.getClassLoader().getResource("me/dinosauruncle/style/styles.css").getPath());
+        jsonObject.put("SERVER_IP", "127.0.0.1");
+        jsonObject.put("SERVER_PORT", 5000);
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(propertyFile);
@@ -40,21 +43,46 @@ public class PropertiesManager {
         }
     }
 
-    public static URL getClassLoaderResource(String key){
-        String result = null;
-        URL resultUrl = null;
+    public static JSONObject readPropertyFileGetJsonObject(){
+        JSONObject jsonObject = null;
         try {
             JSONParser jsonParser = new JSONParser();
             Object obj = jsonParser.parse(new FileReader(RESOUCE_PATH + PROPERTY_FILE_NAME));
-            JSONObject jsonObject = (JSONObject) obj;
-            result = (String) jsonObject.get(key);
-            resultUrl = new URL("file:" +result);
+            jsonObject = (JSONObject) obj;
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+        return jsonObject;
+    }
+
+    public static URL getClassLoaderResource(String key){
+        String result = null;
+        URL resultUrl = null;
+        JSONObject jsonObject = readPropertyFileGetJsonObject();
+        result = (String) jsonObject.get(key);
+        try {
+            resultUrl = new URL("file:" + result);
+        } catch (MalformedURLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
         return resultUrl;
+    }
+
+
+
+    public static String getResourceString(String key){
+        JSONObject jsonObject = readPropertyFileGetJsonObject();
+        return (String)jsonObject.get(key);
+    }
+
+    public static int getResourceInteger(String key){
+        JSONObject jsonObject = readPropertyFileGetJsonObject();
+        return Integer.parseInt(String.valueOf(jsonObject.get(key)));
     }
 }
