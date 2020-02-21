@@ -1,0 +1,24 @@
+plugins {
+    id 'application'
+}
+
+group 'me.dinosauruncle'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/javafx/javafx
+    compile group: 'javafx', name: 'javafx', version: '2.2.7'
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+}
+
+mainClassName = 'me.dinosauruncle.MainApp'
