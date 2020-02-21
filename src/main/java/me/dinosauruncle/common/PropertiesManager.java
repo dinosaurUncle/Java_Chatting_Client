@@ -46,7 +46,6 @@ public class PropertiesManager {
     public static URL getClassLoaderResource(String key){
         String result = null;
         URL resultUrl = null;
-        File propertyFile = new File(RESOUCE_PATH + PROPERTY_FILE_NAME);
         try {
             JSONParser jsonParser = new JSONParser();
             Object obj = jsonParser.parse(new FileReader(RESOUCE_PATH + PROPERTY_FILE_NAME));

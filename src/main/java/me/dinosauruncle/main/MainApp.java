@@ -17,8 +17,6 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        URL url =MainApp.class.getClassLoader().getResource("me/dinosauruncle/style/styles.css");
-        //Parent root = FXMLLoader.load(MainApp.class.getClassLoader().getResource("me/dinosauruncle/login/login.fxml"));
         Parent root = FXMLLoader.load(PropertiesManager.getClassLoaderResource("login.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(PropertiesManager.getClassLoaderResource("styles.css").toExternalForm());
