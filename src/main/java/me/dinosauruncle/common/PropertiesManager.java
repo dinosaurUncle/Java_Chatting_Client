@@ -21,7 +21,7 @@ public class PropertiesManager {
         String identifier = "/me/dinosauruncle";
 
         String path = PropertiesManager.class.getResource("").
-                getPath().replace("classes", "resources");
+                getPath().replace("classes", "resources").replace("java/main", "main");
         RESOUCE_PATH = path;
         File propertyFile = new File(RESOUCE_PATH + PROPERTY_FILE_NAME);
         int index = path.indexOf(identifier);

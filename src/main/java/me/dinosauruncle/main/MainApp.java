@@ -5,9 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import me.dinosauruncle.common.PropertiesManager;
 
-import java.net.URL;
+import me.dinosauruncle.common.PropertiesManager;
 
 public class MainApp extends Application {
 

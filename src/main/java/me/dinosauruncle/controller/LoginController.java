@@ -33,10 +33,11 @@ public class LoginController {
     private void login(ActionEvent event){
         parameterMap.put("id", loginId.getText());
         parameterMap.put("pw", loginPw.getText());
-        if (ServerConnect.getInstance().connect(DataStructureConvert.mapConvertJsonObject(parameterMap)))
-            System.out.println("서버 접속 성공");
-        else
-            System.out.println("서버 접속 실패");
+        Map<String, String> responseMap = ServerConnect.getInstance().
+                connectAfterResponse(DataStructureConvert.mapConvertJsonObject(parameterMap));
+        System.out.println(responseMap);
+
+
     }
 
     @FXML
