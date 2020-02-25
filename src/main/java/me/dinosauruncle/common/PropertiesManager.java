@@ -19,7 +19,7 @@ public class PropertiesManager {
 
     public static void initResouceRecode(){
         String identifier = "/me/dinosauruncle";
-
+        System.out.println(PropertiesManager.class.getResource("/").getPath());
         String path = PropertiesManager.class.getResource("").
                 getPath().replace("classes", "resources").replace("java/main", "main");
         RESOUCE_PATH = path;

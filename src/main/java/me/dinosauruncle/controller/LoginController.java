@@ -32,7 +32,7 @@ public class LoginController {
     @FXML
     private void login(ActionEvent event){
         parameterMap.put("id", loginId.getText());
-        parameterMap.put("pw", loginPw.getText());
+        parameterMap.put("password", loginPw.getText());
         Map<String, String> responseMap = ServerConnect.getInstance().
                 connectAfterResponse(DataStructureConvert.mapConvertJsonObject(parameterMap));
         System.out.println(responseMap);
