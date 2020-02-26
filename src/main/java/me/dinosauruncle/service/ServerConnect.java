@@ -33,24 +33,17 @@ public class ServerConnect {
     public Map<String, String> connectAfterResponse (JSONObject jsonObject){
         Socket socket = new Socket();
         JSONObject inputJsonObject = null;
-            /*
-            socket.connect(new InetSocketAddress(
-                    PropertiesManager.getResourceString("SERVER_IP"), PropertiesManager.getResourceInteger("SERVER_PORT")));
-            IOStreamUtils ioStreamUtils = null;
-            ioStreamUtils = new IOStreamUtils(socket);
-            ioStreamUtils.outputStreamExecute(jsonObject);
-            inputJsonObject = ioStreamUtils.inputStreamExecute();*/
-            RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            try{
+                socket.connect(new InetSocketAddress(
+                        PropertiesManager.getResourceString("SERVER_IP"), PropertiesManager.getResourceInteger("SERVER_PORT")));
+                IOStreamUtils ioStreamUtils = null;
+                ioStreamUtils = new IOStreamUtils(socket);
+                ioStreamUtils.outputStreamExecute(jsonObject);
+                inputJsonObject = ioStreamUtils.inputStreamExecute();
+            } catch (IOException e){
 
+            }
 
-            HttpEntity<String> entity = new HttpEntity<String>(jsonObject.toJSONString(), headers);
-            ResponseEntity<String> response =
-                    restTemplate.postForEntity("http://localhost:8089/account/login", entity, String.class);
-
-            System.out.println(response);
-
-        return null;
+        return DataStructureConvert.jsonObjectConvertMap(inputJsonObject);
     }
 }

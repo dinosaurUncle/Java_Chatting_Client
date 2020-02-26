@@ -34,7 +34,7 @@ public class LoginController {
         parameterMap.put("id", loginId.getText());
         parameterMap.put("password", loginPw.getText());
         Map<String, String> responseMap = ServerConnect.getInstance().
-                connectAfterResponse(DataStructureConvert.mapConvertJsonObject(parameterMap));
+                connectAfterResponse(DataStructureConvert.mapConvertJsonObject("login", parameterMap));
         System.out.println(responseMap);
 
 
