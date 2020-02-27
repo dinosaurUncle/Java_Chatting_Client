@@ -29,6 +29,7 @@ public class PropertiesManager {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("resourcePath", path);
         jsonObject.put("login.fxml", MainApp.class.getClassLoader().getResource("me/dinosauruncle/view/login/login.fxml").getPath());
+        jsonObject.put("signup.fxml", MainApp.class.getClassLoader().getResource("me/dinosauruncle/view/signup/signup.fxml").getPath());
         jsonObject.put("styles.css", MainApp.class.getClassLoader().getResource("me/dinosauruncle/style/styles.css").getPath());
         jsonObject.put("SERVER_IP", "127.0.0.1");
         jsonObject.put("SERVER_PORT", 5000);
