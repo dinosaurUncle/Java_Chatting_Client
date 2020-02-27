@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import me.dinosauruncle.common.DataStructureConvert;
@@ -29,7 +30,7 @@ public class LoginController {
     private TextField loginId;
 
     @FXML
-    private TextField loginPw;
+    private PasswordField loginPw;
 
     @FXML
     private Button loginButton;

@@ -20,7 +20,7 @@
           </font>
         </Label>
             <TextField fx:id="loginId" alignment="CENTER" layoutX="112.0" layoutY="330.0" onKeyPressed="#validation" prefHeight="26.0" prefWidth="206.0" promptText="채팅계정 (이메일 또는 아이디)" />
-            <PasswordField fx:id="loginPw" alignment="CENTER" layoutX="112.0" layoutY="380.0" onKeyPressed="#validation" prefHeight="26.0" prefWidth="206.0" promptText="비밀번호" />
+            <PasswordField fx:id="loginPw" alignment="CENTER" layoutX="112.0" layoutY="380.0" onKeyReleased="#validation" prefHeight="26.0" prefWidth="206.0" promptText="비밀번호" />
             <Button fx:id="loginButton" alignment="CENTER" disable="true" layoutX="112.0" layoutY="421.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="206.0" style="-fx-background-color: #626567#626567;" text="로그인" textFill="WHITE" textOverrun="CLIP" />
             <Label fx:id="searchId" alignment="CENTER" layoutX="218.0" layoutY="566.0" prefHeight="19.0" prefWidth="53.0" text="계정 찾기" textAlignment="CENTER">
                <font>
@@ -37,7 +37,7 @@
                   <Font name="Apple Chancery" size="10.0" />
                </font>
             </Label>
-            <PasswordField alignment="CENTER" layoutX="113.0" layoutY="376.0" prefHeight="26.0" prefWidth="206.0" promptText="비밀번호" />
+
       </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
