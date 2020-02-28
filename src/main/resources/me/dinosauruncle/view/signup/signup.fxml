@@ -32,25 +32,25 @@
                   <ColorAdjust brightness="-0.02" contrast="-0.07" />
               </effect>
           </Button>
-          <PasswordField fx:id="formPassword" layoutX="91.0" layoutY="236.0" prefHeight="37.0" prefWidth="235.0" promptText="비밀번호*" />
-          <TextField fx:id="formName" layoutX="91.0" layoutY="192.0" prefHeight="37.0" prefWidth="235.0" promptText="이름*">
+          <PasswordField fx:id="formPassword" disable="true" layoutX="91.0" layoutY="236.0" prefHeight="37.0" prefWidth="235.0" promptText="비밀번호*" />
+          <TextField fx:id="formName" disable="true" layoutX="91.0" layoutY="192.0" prefHeight="37.0" prefWidth="235.0" promptText="이름*">
               <effect>
                   <ColorAdjust />
               </effect>
           </TextField>
-          <ComboBox fx:id="formGender" layoutX="91.0" layoutY="281.0" prefHeight="37.0" prefWidth="235.0" promptText="성별*" >
+          <ComboBox fx:id="formGender" disable="true" layoutX="91.0" layoutY="281.0" prefHeight="37.0" prefWidth="235.0" promptText="성별*" >
           </ComboBox>
-          <TextField fx:id="formEmail" layoutX="91.0" layoutY="327.0" prefHeight="37.0" prefWidth="235.0" promptText="Email*">
+          <TextField fx:id="formEmail" disable="true" layoutX="91.0" layoutY="327.0" prefHeight="37.0" prefWidth="235.0" promptText="Email*">
               <effect>
                   <ColorAdjust />
               </effect>
           </TextField>
-          <TextField fx:id="formPhonenumber" layoutX="91.0" layoutY="371.0" prefHeight="37.0" prefWidth="235.0" promptText="연락처*">
+          <TextField fx:id="formPhonenumber" disable="true" layoutX="91.0" layoutY="371.0" prefHeight="37.0" prefWidth="235.0" promptText="연락처*">
               <effect>
                   <ColorAdjust />
               </effect>
           </TextField>
-          <Button fx:id="signUp" alignment="CENTER" disable="true" layoutX="90.0" layoutY="419.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="235.0" style="-fx-background-color: #626567#626567;" text="회원가입" textFill="WHITE" textOverrun="CLIP">
+          <Button fx:id="signUpButton" disable="true" alignment="CENTER" layoutX="90.0" layoutY="419.0" mnemonicParsing="false" onAction="#signUp" prefHeight="37.0" prefWidth="235.0" style="-fx-background-color: #626567#626567;" text="회원가입" textFill="WHITE" textOverrun="CLIP">
               <effect>
                   <ColorAdjust brightness="-0.02" contrast="-0.07" />
               </effect>
