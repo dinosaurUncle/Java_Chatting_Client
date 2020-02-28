@@ -17,6 +17,7 @@ import me.dinosauruncle.service.ValidationCheck;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SignUpController implements Initializable {
@@ -95,7 +96,7 @@ public class SignUpController implements Initializable {
     @FXML
     private void login(Event event){
         String fxmlName = "";
-        if (event.getSource() == login){
+        if (event.getSource() == login || event.getSource() == signUpButton){
             fxmlName = "login.fxml";
         } else {
 
@@ -130,6 +131,14 @@ public class SignUpController implements Initializable {
         if (isValidationPass){
             Map<String, String> responseMap = ServerConnect.getInstance().
                     connectAfterResponse(DataStructureConvert.mapConvertJsonObject("signup", parameterMap));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("회원가입");
+            alert.setHeaderText("결과");
+            alert.setContentText(responseMap.get("message"));
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK){
+                login(event);
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("회원가입 유효성 검사");
