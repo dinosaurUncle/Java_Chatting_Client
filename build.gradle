@@ -1,28 +1,41 @@
 plugins {
     id 'application'
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.7'   // 추가
 }
 
-group 'me.dinosauruncle'
-version '1.0-SNAPSHOT'
+group = 'me.dinosauruncle'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
-sourceCompatibility = 1.8
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
 
 repositories {
     mavenCentral()
 }
 
-
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation 'org.springframework.boot:spring-boot-starter'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-    // https://mvnrepository.com/artifact/junit/junit
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
-
 }
 
-mainClassName = 'me.dinosauruncle.MainApp'
+test {
+    useJUnitPlatform()
+}
+mainClassName = 'me.dinosauruncle.chatting_client.mainApp'
