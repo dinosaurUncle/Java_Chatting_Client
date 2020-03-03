@@ -8,4 +8,5 @@ Java_Chatting_Server 기반의 사용자 인터페이스 채팅프로그램
 3) intellij javafx 설정: https://openjfx.io/openjfx-docs/#install-java
 
 MainApp 설정시<br>
-VM-Option --module-path /Users/m05214_jonghoon/utility/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml<br>  해당 내용추가
+--module-path ./lib --add-modules javafx.controls,javafx.fxml<br>
+해당 내용추가

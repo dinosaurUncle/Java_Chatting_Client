@@ -2,6 +2,7 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.7'   // 추가
     id 'org.beryx.jlink' version '2.9.4'
+
 }
 
 group 'me.dinosauruncle'
@@ -36,4 +37,4 @@ dependencies {
 
 }
 
-mainClassName = 'me.dinosauruncle.MainApp'
+mainClassName = "me.dinosauruncle.main.MainApp"
