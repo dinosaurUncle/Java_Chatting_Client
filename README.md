@@ -6,3 +6,6 @@ Java_Chatting_Server 기반의 사용자 인터페이스 채팅프로그램
 1) SceneBuilder(JavaFX 화면설계툴): https://gluonhq.com/developers/
 2) JavaFx 튜토리얼: https://code.makery.ch/kr/library/javafx-tutorial/part1/
 3) intellij javafx 설정: https://openjfx.io/openjfx-docs/#install-java
+
+MainApp 설정시<br>
+VM-Option --module-path /Users/m05214_jonghoon/utility/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml<br>  해당 내용추가
