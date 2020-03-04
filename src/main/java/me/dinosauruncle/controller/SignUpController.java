@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import me.dinosauruncle.common.DataStructureConvert;
@@ -72,7 +71,7 @@ public class SignUpController implements Initializable {
     private void validationIdCheck(ActionEvent actionEvent){
         parameterMap.put("id", formId.getText());
         Map<String, String> responseMap = ServerConnect.getInstance().
-                connectAfterResponse(DataStructureConvert.mapConvertJsonObject("checkId", parameterMap));
+                connectChatServer(DataStructureConvert.mapConvertJsonObject("checkId", parameterMap));
         System.out.println(responseMap);
         boolean isUse = Boolean.valueOf(responseMap.get("isUse")).booleanValue();
         System.out.println("isUse: " + isUse);
@@ -130,7 +129,7 @@ public class SignUpController implements Initializable {
         boolean isValidationPass = Boolean.valueOf(validationResultMap.get("isPass")).booleanValue();
         if (isValidationPass){
             Map<String, String> responseMap = ServerConnect.getInstance().
-                    connectAfterResponse(DataStructureConvert.mapConvertJsonObject("signup", parameterMap));
+                    connectChatServer(DataStructureConvert.mapConvertJsonObject("signup", parameterMap));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("회원가입");
             alert.setHeaderText("결과");

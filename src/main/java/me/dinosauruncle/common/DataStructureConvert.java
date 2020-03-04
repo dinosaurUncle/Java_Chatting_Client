@@ -1,7 +1,10 @@
 package me.dinosauruncle.common;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +27,12 @@ public class DataStructureConvert {
             jsonObject.put(key, map.get(key));
         }
         jsonArray.add(jsonObject);
-        rootJsonObject.put(type, jsonObject);
-        return rootJsonObject;
+        if (StringUtils.isNotEmpty(type)){
+            rootJsonObject.put(type, jsonObject);
+            return  rootJsonObject;
+        } else {
+            return jsonObject;
+        }
     }
 
     public static Map<String, String> jsonObjectConvertMap(JSONObject jsonObject) {
@@ -35,5 +42,16 @@ public class DataStructureConvert {
             responseMap.put(key, String.valueOf(jsonObject.get(key)));
         }
         return responseMap;
+    }
+
+    public static JSONObject stringToJsonObject(String serializationString){
+        JSONObject jsonObject = new JSONObject();
+        JSONParser jsonParser = new JSONParser();
+        try {
+            jsonObject = (JSONObject) jsonParser.parse(serializationString);
+        } catch (ParseException e){
+
+        }
+        return jsonObject;
     }
 }

@@ -3,10 +3,7 @@ package me.dinosauruncle.controller;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import me.dinosauruncle.common.DataStructureConvert;
 import me.dinosauruncle.common.FxmlManager;
@@ -49,8 +46,15 @@ public class LoginController {
         parameterMap.put("id", loginId.getText());
         parameterMap.put("password", loginPw.getText());
         Map<String, String> responseMap = ServerConnect.getInstance().
-                connectAfterResponse(DataStructureConvert.mapConvertJsonObject("login", parameterMap));
-        System.out.println(responseMap);
+                connectChatServer(DataStructureConvert.mapConvertJsonObject("login", parameterMap));
+        ServerConnect.getInstance().setSession(responseMap.get("account"));
+        System.out.print(ServerConnect.getSession());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("회원가입");
+        alert.setHeaderText("결과");
+        alert.setContentText(responseMap.get("message"));
+        alert.show();
+
 
 
     }
