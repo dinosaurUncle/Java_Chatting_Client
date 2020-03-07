@@ -10,10 +10,7 @@ import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import me.dinosauruncle.common.DataStructureConvert;
 import me.dinosauruncle.common.FxmlManager;
@@ -53,8 +50,14 @@ public class LoginController {
     private void login(ActionEvent event) {
         this.parameterMap.put("id", this.loginId.getText());
         this.parameterMap.put("password", this.loginPw.getText());
-        Map<String, String> responseMap = this.serverConnect.connectAfterResponse(this.dataStructureConvert.mapConvertJsonObject("login", this.parameterMap));
-        System.out.println(responseMap);
+        Map<String, String> responseMap = this.serverConnect.connectChatServer(this.dataStructureConvert.mapConvertJsonObject("login", this.parameterMap));
+        serverConnect.setSession(responseMap.get("account"));
+        System.out.print(ServerConnect.getSession());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("회원가입");
+        alert.setHeaderText("결과");
+        alert.setContentText(responseMap.get("message"));
+        alert.show();
     }
 
     @FXML

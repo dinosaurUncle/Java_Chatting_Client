@@ -78,7 +78,7 @@ public class SignUpController implements Initializable {
     @FXML
     private void validationIdCheck(ActionEvent actionEvent) {
         this.parameterMap.put("id", this.formId.getText());
-        Map<String, String> responseMap = this.serverConnect.connectAfterResponse(this.dataStructureConvert.mapConvertJsonObject("checkId", this.parameterMap));
+        Map<String, String> responseMap = this.serverConnect.connectChatServer(this.dataStructureConvert.mapConvertJsonObject("checkId", this.parameterMap));
         System.out.println(responseMap);
         boolean isUse = Boolean.valueOf((String)responseMap.get("isUse"));
         System.out.println("isUse: " + isUse);
@@ -103,7 +103,7 @@ public class SignUpController implements Initializable {
     private void login(Event event) {
         String fxmlName = "";
         if (event.getSource() == this.login || event.getSource() == this.signUpButton) {
-            fxmlName = "login.fxml";
+            fxmlName = "fxml.login";
         }
 
         this.fxmlManager.changePage(fxmlName, (Stage)this.idCheck.getScene().getWindow());
@@ -135,7 +135,7 @@ public class SignUpController implements Initializable {
         Map<String, String> validationResultMap = this.validationCheck.validationCheck(this.parameterMap);
         boolean isValidationPass = Boolean.valueOf((String)validationResultMap.get("isPass"));
         if (isValidationPass) {
-            Map<String, String> responseMap = this.serverConnect.connectAfterResponse(this.dataStructureConvert.mapConvertJsonObject("signup", this.parameterMap));
+            Map<String, String> responseMap = this.serverConnect.connectChatServer(this.dataStructureConvert.mapConvertJsonObject("signup", this.parameterMap));
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("회원가입");
             alert.setHeaderText("결과");
@@ -145,39 +145,23 @@ public class SignUpController implements Initializable {
                 this.login(event);
             }
         } else {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("회원가입 유효성 검사");
-            alert.setHeaderText("검토항목: " + (String)validationResultMap.get("target"));
-            alert.setContentText((String)validationResultMap.get("message"));
+            alert.setHeaderText("검토항목: " + validationResultMap.get("target"));
+            alert.setContentText(validationResultMap.get("message"));
             alert.show();
-            String var14 = (String)validationResultMap.get("target");
-            byte var15 = -1;
-            switch(var14.hashCode()) {
-                case -1249512767:
-                    if (var14.equals("gender")) {
-                        var15 = 2;
-                    }
+            switch (validationResultMap.get("target")){
+                case "password":
+                    formPassword.requestFocus();
                     break;
-                case 3373707:
-                    if (var14.equals("name")) {
-                        var15 = 1;
-                    }
+                case "name" :
+                    formName.requestFocus();
                     break;
-                case 1216985755:
-                    if (var14.equals("password")) {
-                        var15 = 0;
-                    }
-            }
-
-            switch(var15) {
-                case 0:
-                    this.formPassword.requestFocus();
+                case "gender" :
+                    formGender.requestFocus();
                     break;
-                case 1:
-                    this.formName.requestFocus();
+                default:
                     break;
-                case 2:
-                    this.formGender.requestFocus();
             }
         }
 

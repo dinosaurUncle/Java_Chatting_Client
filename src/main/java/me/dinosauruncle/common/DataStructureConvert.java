@@ -9,8 +9,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class DataStructureConvert {
     private Map<String, String> responseMap = new HashMap();
@@ -35,8 +39,12 @@ public class DataStructureConvert {
             }
 
             jsonArray.add(jsonObject);
-            rootJsonObject.put(type, jsonObject);
-            return rootJsonObject;
+            if (StringUtils.isNotEmpty(type)){
+                rootJsonObject.put(type, jsonObject);
+                return  rootJsonObject;
+            } else {
+                return jsonObject;
+            }
         }
     }
 
@@ -51,5 +59,16 @@ public class DataStructureConvert {
         }
 
         return this.responseMap;
+    }
+
+    public JSONObject stringToJsonObject(String serializationString){
+        JSONObject jsonObject = new JSONObject();
+        JSONParser jsonParser = new JSONParser();
+        try {
+            jsonObject = (JSONObject) jsonParser.parse(serializationString);
+        } catch (ParseException e){
+
+        }
+        return jsonObject;
     }
 }

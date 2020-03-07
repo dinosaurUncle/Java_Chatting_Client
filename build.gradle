@@ -38,4 +38,4 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-mainClassName = 'me.dinosauruncle.chatting_client.mainApp'
+mainClassName = 'me.dinosauruncle.main.MainApp'

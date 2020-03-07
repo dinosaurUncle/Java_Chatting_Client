@@ -9,46 +9,66 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Map;
+
+import me.dinosauruncle.ChattingClientApplication;
 import me.dinosauruncle.common.DataStructureConvert;
 import me.dinosauruncle.common.IOStreamUtils;
 import me.dinosauruncle.configuration.ScreensConfiguration;
+import me.dinosauruncle.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.core.env.Environment;
 
 public class ServerConnect {
     private Socket socket;
-    @Autowired
-    Environment env;
+
     IOStreamUtils ioStreamUtils;
     DataStructureConvert dataStructureConvert;
+    private static User session;
+    private static boolean connecting;
 
     public ServerConnect() {
-    }
-
-    public Map<String, String> connectAfterResponse(JSONObject jsonObject) {
+        connecting = false;
+        session = new User();
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(new Class[]{ScreensConfiguration.class});
         this.ioStreamUtils = (IOStreamUtils)context.getBean("ioStreamUtils");
         this.dataStructureConvert = (DataStructureConvert)context.getBean("dataStructureConvert");
-        Map<String, String> resultMap = null;
-        if (this.socket == null) {
-            this.socket = new Socket();
-        } else if (this.socket.isClosed()) {
-            this.socket = new Socket();
-        }
+    }
 
+    public Map<String, String> connectChatServer(JSONObject jsonObject) {
         JSONObject inputJsonObject = null;
+            try {
+                if (!connecting) {
+                    socket = new Socket();
+                    this.socket.connect
+                            (new InetSocketAddress
+                                    (String.valueOf(ChattingClientApplication.propertyMap.get("chat.server.ip")),
+                                            Integer.valueOf(String.valueOf(ChattingClientApplication.propertyMap.get("chat.server.port")))
+                                    )
+                            );
+                }
 
-        try {
-            this.socket.connect(new InetSocketAddress(String.valueOf(this.env.getProperty("chat.server.ip")), Integer.valueOf(this.env.getProperty("chat.server.ip"))));
-            this.ioStreamUtils.setSocket(this.socket);
-            this.ioStreamUtils.outputStreamExecute(jsonObject);
-            inputJsonObject = this.ioStreamUtils.inputStreamExecute();
-            resultMap = this.dataStructureConvert.jsonObjectConvertMap(inputJsonObject);
+                this.ioStreamUtils.setSocket(this.socket);
+                this.ioStreamUtils.outputStreamExecute(jsonObject);
+                inputJsonObject = this.ioStreamUtils.inputStreamExecute();
+
+                if (inputJsonObject.get("connecting") != null){
+                    if (StringUtils.isNotEmpty(String.valueOf(inputJsonObject.get("connecting")))){
+                        if (String.valueOf(inputJsonObject.get("connecting")).equals("true")) connecting = true;
+                    }
+                }
+                if (!connecting) socket.close();
         } catch (IOException var6) {
         }
 
-        return resultMap;
+        return dataStructureConvert.jsonObjectConvertMap(inputJsonObject);
+    }
+
+    public void setSession(String jsonString){
+        if (StringUtils.isNotEmpty(jsonString)) session.setUser(dataStructureConvert.stringToJsonObject(jsonString));
+    }
+
+    public static User getSession() {
+        return session;
     }
 }
